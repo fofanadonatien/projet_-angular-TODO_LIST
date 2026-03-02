@@ -1,0 +1,52 @@
+:host {
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    user-select: none;
+
+    div.color {
+        display: inline-block;
+        width: 2em;
+        height: 2em;
+        border-radius: 50%;
+        border: solid black 1px;
+        margin-right: 4px;
+    }
+
+    label.delete {
+        display: none;
+    }
+
+    &:hover label.delete {
+        display: inline;
+        margin-left: auto;
+        cursor: pointer;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        > * {
+            flex: 1 1 auto;
+            display: flex;
+            align-items: center;
+        }
+
+        section.actions {
+            flex-direction: row-reverse;
+        }
+
+        section.data {
+            mat-form-field:has(input[type=color]) {
+                flex: 0 0 auto;
+                width: 64px;
+            }
+
+            mat-form-field:has(input[type=text]) {
+                flex: 1 1 auto;
+            }
+        }
+    }
+}

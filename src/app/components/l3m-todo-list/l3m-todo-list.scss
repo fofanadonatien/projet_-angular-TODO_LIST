@@ -1,0 +1,30 @@
+:host {
+    display: flex;
+    flex-direction: column;
+
+    header {
+        flex: 0 0 auto;
+        display: flex;
+        flex-direction: row;
+        gap: 4px;
+        
+        mat-form-field:has(input[type=color]) {
+            flex: 0 0 auto;
+            width: 64px;
+        }
+
+        form:has(input[type=text]) {
+            flex: 1 1 auto;
+
+            mat-form-field  {
+                display: flex;
+                flex: 1 1 auto;
+            }
+        }
+    }
+
+    footer {
+        border-top: solid black 2px;
+    }
+
+}

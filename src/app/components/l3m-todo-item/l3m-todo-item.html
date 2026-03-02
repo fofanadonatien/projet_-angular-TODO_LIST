@@ -1,0 +1,26 @@
+@if (edit()) {
+    <form>
+        <section class="data">
+            <mat-form-field>
+                <mat-label>Couleur</mat-label>
+                <input matInput type="color" name="color" />
+            </mat-form-field>
+            <mat-checkbox name="completed"></mat-checkbox>
+            <mat-form-field>
+                <mat-label>Label</mat-label>
+                <input matInput type="text" name="label" />
+            </mat-form-field>
+        </section>
+        <section class="actions">
+            <button mat-button type="submit">VALIDER</button>
+            <button mat-button type="button">ANNULER</button>
+        </section>
+    </form>
+
+} @else {
+    <div class="color" [style.backgroundColor]="data().color"></div>
+    <mat-checkbox name="completed"></mat-checkbox>
+    <label><!-- Label de l'item ici --></label>
+    <label class="delete">❌</label>
+}
+

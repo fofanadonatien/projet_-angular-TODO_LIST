@@ -1,0 +1,13 @@
+<mat-form-field>
+    <mat-label>Filtrer selon la complétion</mat-label>
+    <mat-select [formControl]="controlsFilter.completedFilter">
+        @for (optFilter of optionsFilter; track optFilter) {
+            <mat-option [value]="optFilter.fct">{{optFilter.label}}</mat-option>
+        }
+    </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+    <mat-label>Filtrer par mots</mat-label>
+    <input matInput type="text" [formControl]="controlsFilter.wordsForFilter" />
+</mat-form-field>

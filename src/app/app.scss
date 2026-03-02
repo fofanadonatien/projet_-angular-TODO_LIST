@@ -1,0 +1,19 @@
+:host {
+    display: block;
+
+    > mat-toolbar {
+        background-color: var(--mat-sys-primary);
+        color: var(--mat-sys-on-primary);
+    }
+
+    > section {
+        display: flex;
+        flex-direction: row;
+
+        > * {
+            flex: 1 1 auto;
+            border: solid black 1px;
+            padding: 4px;
+        }
+    }
+}
