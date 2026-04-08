@@ -21,11 +21,12 @@ export class App {
 
   // Protected data
   // à remplacer pour utiliser les données du service L3mTotoListService
-  protected readonly todoList = signal<TodoList>([
+  protected readonly todoList = this._srv.tdl;
+  /*protected readonly todoList = signal<TodoList>([
     { label: 'Faire les courses', color: 'blue', completed: false },
     { label: 'Préparer le repas', color: 'red', completed: true },
     { label: 'Aller courir', color: 'green', completed: false },
-  ]);
+  ]);*/
 
   /**
    * Traite les changements émis par le composant L3mTodoList
@@ -35,6 +36,14 @@ export class App {
    */
   protected updateList(change: L3mTodoListOutput): void {
     // à compléter
+    if(change.type === 'append'){
+        this._srv.appendItem(change.label, change.color);
+    }
+    else if(change.type === 'remove'){
+        this._srv.removeItems(change.items);
+    } else if(change.type === 'update'){
+        this._srv.updateItems(change.items, change.updates)
+    }
   }
 
 }

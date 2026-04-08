@@ -1,26 +1,44 @@
 @if (edit()) {
-    <form>
-        <section class="data">
-            <mat-form-field>
-                <mat-label>Couleur</mat-label>
-                <input matInput type="color" name="color" />
-            </mat-form-field>
-            <mat-checkbox name="completed"></mat-checkbox>
-            <mat-form-field>
-                <mat-label>Label</mat-label>
-                <input matInput type="text" name="label" />
-            </mat-form-field>
-        </section>
-        <section class="actions">
-            <button mat-button type="submit">VALIDER</button>
-            <button mat-button type="button">ANNULER</button>
-        </section>
-    </form>
-
+  <form (submit)="submitEdition()">
+    <section class="data">
+      <mat-form-field>
+        <mat-label>Couleur</mat-label>
+        <input
+          matInput
+          type="color"
+          name="color"
+          [ngModel]="editedColor()"
+          (ngModelChange)="editedColor.set($event)"
+        />
+      </mat-form-field>
+      <mat-checkbox
+        name="completed"
+        [ngModel]="editedCompleted()"
+        (ngModelChange)="editedCompleted.set($event)"
+      ></mat-checkbox>
+      <mat-form-field>
+        <mat-label>Label</mat-label>
+        <input
+          matInput
+          type="text"
+          name="label"
+          [ngModel]="editedLabel()"
+          (ngModelChange)="editedLabel.set($event)"
+        />
+      </mat-form-field>
+    </section>
+    <section class="actions">
+      <button mat-button type="submit">VALIDER</button>
+      <button mat-button type="button" (click)="cancelEdit()">ANNULER</button>
+    </section>
+  </form>
 } @else {
-    <div class="color" [style.backgroundColor]="data().color"></div>
-    <mat-checkbox name="completed"></mat-checkbox>
-    <label><!-- Label de l'item ici --></label>
-    <label class="delete">❌</label>
+  <div class="color" [style.backgroundColor]="data().color"></div>
+  <mat-checkbox
+    name="completed"
+    [ngModel]="data().completed"
+    (ngModelChange)="updateCompleted($event)"
+  ></mat-checkbox>
+  <label>{{ data().label }}</label>
+  <label class="delete" (click)="deleteItem()">❌</label>
 }
-

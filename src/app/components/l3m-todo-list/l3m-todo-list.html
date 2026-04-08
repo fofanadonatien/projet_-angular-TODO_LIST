@@ -1,25 +1,40 @@
 <header>
+  <mat-form-field>
+    <mat-label>Couleur</mat-label>
+    <input matInput type="color" name="currentColor" />
+  </mat-form-field>
+  <mat-checkbox
+    name="completed"
+    [ngModel]="allcompleted()"
+    (ngModelChange)="toggleAllCompleted($event)"
+  ></mat-checkbox>
+  <form (submit)="onSubmitNewItem()">
     <mat-form-field>
-        <mat-label>Couleur</mat-label>
-        <input matInput type="color" name="currentColor" />
+      <mat-label>Label</mat-label>
+      <input matInput type="text" name="newLabel" />
     </mat-form-field>
-    <mat-checkbox name="completed"></mat-checkbox>
-    <form>
-        <mat-form-field>
-            <mat-label>Label</mat-label>
-            <input matInput type="text" name="newLabel" />
-        </mat-form-field>
-    </form>
+  </form>
 </header>
 
 <section class="items-list">
-    <!-- Liste des items ici -->
+  <!-- Liste des items ici  -->
+  @for (item of filteredItems(); track item) {
+    <l3m-todo-item
+      [data]="item"
+      (change)="propagateItemChange(item, $event)"
+      [edit]="editedItem() === item"
+      (dblclick)="editedItem.set(item)"
+      (cancelEdition)="editedItem.set(null)"
+    ></l3m-todo-item>
+  }
 </section>
 
 <!-- Afficher le footer seulement si la liste d'items n'est pas vide -->
-<footer>
-    <label>XXX items non cochés</label>
-    
-    <!-- Ajouter le composant filtre -->
-</footer>
+@if (showeFooter()) {
+  <footer>
+    <label>{{ remainingItemsCount() }} items non cochés</label>
 
+    <!-- Ajouter le composant filtre -->
+    <l3m-item-filter (change)="currentFilter.set($event)"></l3m-item-filter>
+  </footer>
+}
